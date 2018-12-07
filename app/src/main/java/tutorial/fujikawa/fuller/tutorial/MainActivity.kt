@@ -19,6 +19,13 @@ class MainActivity : AppCompatActivity() {
         val key:String = "text"
         val database = FirebaseDatabase.getInstance()
         val ref = database.getReference(key)
+
+        submit.setOnClickListener{
+            var data : String = textdata.text.toString()
+            ref.setValue(data)
+            textdata.setText("")
+        }
+
         ref.addValueEventListener(object: ValueEventListener {
             var list : MutableList<String> = mutableListOf()
             override fun onDataChange(dataSnapshot: DataSnapshot) {
