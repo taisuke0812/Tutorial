@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "562366910309",
+    "firebase_url": "https://tutorial-bd779.firebaseio.com",
+    "project_id": "tutorial-bd779",
+    "storage_bucket": "tutorial-bd779.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562366910309:android:16fb9e9ac7e764ef",
+        "android_client_info": {
+          "package_name": "tutorial.fujikawa.fuller.tutorial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "562366910309-g16npf9cr2top3tie13qgufkhule8sg6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPltY1F2lB4ZmN_0jW59WSyoRmU5aoWf0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
