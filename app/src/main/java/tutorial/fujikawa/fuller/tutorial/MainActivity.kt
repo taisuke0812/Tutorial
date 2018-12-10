@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val id = listOf("taisuke","t_fujiS")
         val tweet = listOf("HelloWorld!","Like Twitter")
-        val img_id = listOf(R.drawable.ic_launcher_background,R.drawable.ic_launcher_background)
+        val img_id = listOf(R.drawable.images,R.drawable.images)
         val tweets = List(id.size){i -> TweetData(id[i],tweet[i],img_id[i])}
 
         val adapter = TweetListAdapter(this, tweets)
