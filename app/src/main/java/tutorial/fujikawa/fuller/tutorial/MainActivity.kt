@@ -31,13 +31,37 @@ class MainActivity : AppCompatActivity() {
 
     class TweetListAdapter(context: Context, tweets: List<TweetData>) : ArrayAdapter<TweetData>(context, 0, tweets) {
         private val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            var view = convertView
+            var holder: ViewHolder
+
+            if (view == null) {
+                view = layoutInflater.inflate(R.layout.list_item, parent, true)
+                //うまくいかへん
+                /*
+                holder = ViewHolder(
+                    view?.id_name!!,
+                    view.descTextView,
+                    view.flowerImgView
+                )
+                */
+                //view.tag = holder
+                return view
+            } else {
+                holder = view.tag as ViewHolder
+                return view
+            }
+
+        }
+
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val adapter = TweetListAdapter(this, tweets)
+        view.adapter = adapter
 
         /*
         val key:String = "text"
