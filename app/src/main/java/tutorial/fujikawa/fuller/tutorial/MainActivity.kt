@@ -16,6 +16,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.list_item.*
+import org.w3c.dom.Text
+
+//import tutorial.fujikawa.fuller.tutorial.R.id.list_item
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     data class TweetData(val id:String, val tweet:String,val img_id:Int )
     val tweets = List(id.size){i -> TweetData(id[i],tweet[i],img_id[i])}
     //ここではlist_itemの要素を持つdata classを作成する
-    data class ViewHolder(val id: TextView,val tweet: TextView,val profile_img:ImageView)
+    data class ViewHolder(var id: TextView,var tweet: TextView,var profile_img:ImageView)
 
     class TweetListAdapter(context: Context, tweets: List<TweetData>) : ArrayAdapter<TweetData>(context, 0, tweets) {
         private val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -36,16 +40,17 @@ class MainActivity : AppCompatActivity() {
             var holder: ViewHolder
 
             if (view == null) {
-                view = layoutInflater.inflate(R.layout.list_item, parent, true)
+                view = layoutInflater.inflate(R.layout.list_item, parent, false)
                 //うまくいかへん
-                /*
+
                 holder = ViewHolder(
-                    view?.id_name!!,
-                    view.descTextView,
-                    view.flowerImgView
+                    view?.id_name,
+                    view?.tweet_data,
+                    view?.profile_img
                 )
-                */
-                //view.tag = holder
+
+                view.tag = holder
+
                 return view
             } else {
                 holder = view.tag as ViewHolder
@@ -62,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val adapter = TweetListAdapter(this, tweets)
         view.adapter = adapter
+
 
         /*
         val key:String = "text"
