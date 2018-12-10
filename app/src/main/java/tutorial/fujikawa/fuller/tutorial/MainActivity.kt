@@ -23,7 +23,7 @@ import org.w3c.dom.Text
 //import tutorial.fujikawa.fuller.tutorial.R.id.list_item
 
 class MainActivity : AppCompatActivity() {
-
+    var key_ : Int = 1
     //ここでは、list_itemに格納するデータを持つdata classを作成する
     data class TweetData(val id:String, val tweet:String,val img_id:Int )
 
@@ -70,35 +70,23 @@ class MainActivity : AppCompatActivity() {
         val tweet = listOf("HelloWorld!","Like Twitter")
         val img_id = listOf(R.drawable.images,R.drawable.images)
         val tweets = List(id.size){i -> TweetData(id[i],tweet[i],img_id[i])}
-
+        val img = R.drawable.images
         val adapter = TweetListAdapter(this, tweets)
         view.adapter = adapter
-
-
-        /*
-        val key:String = "text"
+        //val key:String = "1"
         val database = FirebaseDatabase.getInstance()
-        val ref = database.getReference(key)
-
-        submit.setOnClickListener{
-            var data : String = textdata.text.toString()
-            ref.setValue(data)
-            textdata.setText("")
-        }
-
+        val ref = database.getReference()
         ref.addValueEventListener(object: ValueEventListener {
-            var list : MutableList<String> = mutableListOf()
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val values : Any? = dataSnapshot.value
-                val text : String = values.toString()
-                /*
-                var value : Map<String,String>? = values as? Map<String,String>
-                list.add(value.toString())
-                var text:String = value?.getOrDefault("2","hello").toString()
-                */
-                list.add(text)
-                val adapter = ArrayAdapter<String>(this@MainActivity, android.R.layout.simple_list_item_1, list)
-                view.setAdapter(adapter)
+
+                var id_value = dataSnapshot.child(key_.toString()).child("id").value
+                var tweet_value = dataSnapshot.child(key_.toString()).child("tweet").value
+                var text_id : String = id_value.toString()
+                var text_tweet : String = tweet_value.toString()
+                var data_image = img
+                var tweet_values = TweetData(text_id,text_tweet,data_image)
+                adapter.add(tweet_values)
+                Count()
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -106,8 +94,9 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        */
     }
-
+    fun Count(){
+        key_+=1
+    }
 
 }
