@@ -66,27 +66,25 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val id = listOf("taisuke","t_fujiS")
-        val tweet = listOf("HelloWorld!","Like Twitter")
+
+        val id = listOf("@taisuke","@t_fujiS")
+        val tweet = listOf("Fuller","Like Twitter App")
         val img_id = listOf(R.drawable.images,R.drawable.images)
         val tweets = List(id.size){i -> TweetData(id[i],tweet[i],img_id[i])}
         val img = R.drawable.images
+
         val adapter = TweetListAdapter(this, tweets)
         view.adapter = adapter
         //val key:String = "1"
         val database = FirebaseDatabase.getInstance()
         val ref = database.getReference()
+
         ref.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                var id_value = dataSnapshot.child(key_.toString()).child("id").value
-                var tweet_value = dataSnapshot.child(key_.toString()).child("tweet").value
-                var text_id : String = id_value.toString()
-                var text_tweet : String = tweet_value.toString()
-                var data_image = img
-                var tweet_values = TweetData(text_id,text_tweet,data_image)
-                adapter.add(tweet_values)
-                Count()
+                //直近1ツイートだけ取得
+                var num = dataSnapshot.childrenCount
+                key_ = num.toInt()
+                SetTweet(adapter,dataSnapshot)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -95,8 +93,21 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
+    //keyを増やす関数
+    //なんとなく関数化した
     fun Count(){
         key_+=1
     }
-
+    //ツイートをリストに入れる関数
+    fun SetTweet(adapter:TweetListAdapter,dataSnapshot: DataSnapshot){
+        var img = R.drawable.images
+        var id_value = dataSnapshot.child(key_.toString()).child("id").value
+        var tweet_value = dataSnapshot.child(key_.toString()).child("tweet").value
+        var text_id : String = id_value.toString()
+        var text_tweet : String = tweet_value.toString()
+        var data_image = img
+        var tweet_values = TweetData(text_id,text_tweet,data_image)
+        adapter.add(tweet_values)
+        Count()
+    }
 }
