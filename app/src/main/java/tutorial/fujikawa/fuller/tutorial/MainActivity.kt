@@ -25,7 +25,8 @@ import org.w3c.dom.Text
 class MainActivity : AppCompatActivity() {
     var key_ : Int = 1
     //ここでは、list_itemに格納するデータを持つdata classを作成する
-    data class TweetData(val id:String, val tweet:String,val img_id:Int )
+    data class TweetData(val id:String, val tweet:String,val img_id:Int,val tweet_img:String,
+                         val rt:Int = R.drawable.rt,val fav :Int = R.drawable.fav,val share:Int=R.drawable.share,val comment:Int=R.drawable.coment)
 
     //ここではlist_itemの要素を持つdata classを作成する
     //data class ViewHolder(var id: TextView,var tweet: TextView,var profile_img:ImageView)
@@ -33,6 +34,11 @@ class MainActivity : AppCompatActivity() {
         val id = view.findViewById<TextView>(R.id.id_name)
         val txt = view.findViewById<TextView>(R.id.tweet_data)
         val img = view.findViewById<ImageView>(R.id.profile_img)
+        val tweet_img = view.findViewById<ImageView>(R.id.tweet_image)
+        val fav = view.findViewById<ImageView>(R.id.fav)
+        val rt =  view.findViewById<ImageView>(R.id.rt)
+        val share = view.findViewById<ImageView>(R.id.share)
+        val comment = view.findViewById<ImageView>(R.id.comment)
     }
     class TweetListAdapter(context: Context, tweets: List<TweetData>) : ArrayAdapter<TweetData>(context, 0, tweets) {
         private val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -47,12 +53,22 @@ class MainActivity : AppCompatActivity() {
                 holder.id.text = data.id
                 holder.txt.text = data.tweet
                 holder.img.setImageBitmap(BitmapFactory.decodeResource(context.resources, data.img_id))
+                holder.tweet_img.setImageBitmap(BitmapFactory.decodeResource(context.resources, data.tweet_img))
+                holder.fav.setImageBitmap(BitmapFactory.decodeResource(context.resources, data.fav))
+                holder.rt.setImageBitmap(BitmapFactory.decodeResource(context.resources, data.rt))
+                holder.share.setImageBitmap(BitmapFactory.decodeResource(context.resources, data.share))
+                holder.comment.setImageBitmap(BitmapFactory.decodeResource(context.resources, data.comment))
                 return view
             } else {
                 holder = view.tag as ViewHolder
                 holder.id.text = data.id
                 holder.txt.text = data.tweet
                 holder.img.setImageBitmap(BitmapFactory.decodeResource(context.resources, data.img_id))
+                holder.tweet_img.setImageBitmap(BitmapFactory.decodeResource(context.resources, data.tweet_img))
+                holder.fav.setImageBitmap(BitmapFactory.decodeResource(context.resources, data.fav))
+                holder.rt.setImageBitmap(BitmapFactory.decodeResource(context.resources, data.rt))
+                holder.share.setImageBitmap(BitmapFactory.decodeResource(context.resources, data.share))
+                holder.comment.setImageBitmap(BitmapFactory.decodeResource(context.resources, data.comment))
                 return view
             }
             view = layoutInflater.inflate(R.layout.list_item, parent, false)
@@ -70,7 +86,8 @@ class MainActivity : AppCompatActivity() {
         val id = listOf("@taisuke","@t_fujiS")
         val tweet = listOf("Fuller","Like Twitter App")
         val img_id = listOf(R.drawable.images,R.drawable.images)
-        val tweets = List(id.size){i -> TweetData(id[i],tweet[i],img_id[i])}
+        val url = listOf("https://5th.fuller-inc.com/assets/135837d7f8850217277dbcdc3bda5a10.png","https://prtimes.jp/i/5362/103/resize/d5362-103-721728-11.jpg")
+        val tweets = List(id.size){i -> TweetData(id[i],tweet[i],img_id[i],url[i])}
         val img = R.drawable.images
 
         val adapter = TweetListAdapter(this, tweets)
