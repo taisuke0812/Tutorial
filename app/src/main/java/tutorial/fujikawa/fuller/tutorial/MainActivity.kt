@@ -48,37 +48,28 @@ class MainActivity : AppCompatActivity() {
             var view = convertView
             var holder: ViewHolder
             val data = getItem(position) as TweetData
+
             if (view == null) {
                 view = layoutInflater.inflate(R.layout.list_item, parent, false)
                 holder = ViewHolder(view)
                 view.tag = holder
-                holder.id.text = data.id
-                holder.txt.text = data.tweet
-                holder.img.setImageResource(data.img_id)
-                //holder.tweet_img.setImageURI(Uri.parse(data.tweet_img))
-                //Picasso.load(data.tweet_img).into(holder.tweet_img);
-                holder.tweet_img.setImageResource(data.tweet_img)
-                holder.fav.setImageResource(data.fav)
-                holder.rt.setImageResource(data.rt)
-                holder.share.setImageResource(data.share)
-                holder.comment.setImageResource(data.comment)
-                return view
             } else {
                 holder = view.tag as ViewHolder
-                holder.id.text = data.id
-                holder.txt.text = data.tweet
-                holder.img.setImageResource(data.img_id)
-                //holder.tweet_img.setImageURI(Uri.parse(data.tweet_img))
-                //Picasso.load(data.tweet_img).into(holder.tweet_img);
-                holder.tweet_img.setImageResource(data.tweet_img)
-                holder.fav.setImageResource(data.fav)
-                holder.rt.setImageResource(data.rt)
-                holder.share.setImageResource(data.share)
-                holder.comment.setImageResource(data.comment)
+            }
+            holder.id.text = data.id
+            holder.txt.text = data.tweet
+            holder.img.setImageResource(data.img_id)
+            holder.tweet_img.setImageResource(data.tweet_img)
+            holder.fav.setImageResource(data.fav)
+            holder.rt.setImageResource(data.rt)
+            holder.share.setImageResource(data.share)
+            holder.comment.setImageResource(data.comment)
+            if(view==null){
+                view = layoutInflater.inflate(R.layout.list_item, parent, false)
+                return view;
+            }else {
                 return view
             }
-            view = layoutInflater.inflate(R.layout.list_item, parent, false)
-            return view
         }
 
 
