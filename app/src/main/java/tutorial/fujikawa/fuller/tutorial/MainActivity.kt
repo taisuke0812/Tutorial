@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
 
         //val key:String = "1"
         val database = FirebaseDatabase.getInstance()
-        val ref = database.getReference()
+        val ref = database.reference
 
         ref.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
     }
     //keyを増やす関数
     //なんとなく関数化した
-    fun Count(){
+    private fun count(){
         key_+=1
     }
     //ツイートをリストに入れる関数
@@ -125,6 +125,6 @@ class MainActivity : AppCompatActivity() {
         //var data_url:String = tweet_img_.toString()
         var tweet_values = TweetData(text_id,text_tweet,data_image)
         adapter.add(tweet_values)
-        Count()
+        count()
     }
 }
