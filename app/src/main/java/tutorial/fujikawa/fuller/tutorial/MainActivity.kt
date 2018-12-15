@@ -104,15 +104,15 @@ class MainActivity : AppCompatActivity() {
     }
     //ツイートをリストに入れる関数
     fun SetTweet(adapter:TweetListAdapter,dataSnapshot: DataSnapshot){
-        var img = R.drawable.images
-        var id_value = dataSnapshot.child(key_.toString()).child("id").value
-        var tweet_value = dataSnapshot.child(key_.toString()).child("tweet").value
-        var tweet_img_ = dataSnapshot.child(key_.toString()).child("url").value
-        var text_id : String = id_value.toString()
-        var text_tweet : String = tweet_value.toString()
-        var data_image = img
+        val img = R.drawable.images
+        val id_value = dataSnapshot.child(key_.toString()).child("id").value
+        val tweet_value = dataSnapshot.child(key_.toString()).child("tweet").value
+        val tweet_img_ = dataSnapshot.child(key_.toString()).child("url").value
+        val text_id : String = id_value.toString()
+        val text_tweet : String = tweet_value.toString()
+        val data_image = img
         //var data_url:String = tweet_img_.toString()
-        var tweet_values = TweetData(text_id,text_tweet,data_image)
+        val tweet_values = TweetData(text_id,text_tweet,data_image)
         adapter.add(tweet_values)
         count()
     }
