@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
     //keyを増やす関数
     //なんとなく関数化した
     private fun count(){
-        key_+=1
+        this.key_+=1
     }
     //ツイートをリストに入れる関数
     fun SetTweet(adapter:TweetListAdapter,dataSnapshot: DataSnapshot){
