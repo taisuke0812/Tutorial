@@ -21,6 +21,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.list_item.*
 import org.w3c.dom.Text
+import tutorial.fujikawa.fuller.tutorial.R.id.view
 
 //import tutorial.fujikawa.fuller.tutorial.R.id.list_item
 
@@ -41,21 +42,16 @@ class MainActivity : AppCompatActivity() {
         val rt =  view.findViewById<ImageView>(R.id.rt)
         val share = view.findViewById<ImageView>(R.id.share)
         val comment = view.findViewById<ImageView>(R.id.comment)
+        companion object {
+            const val LAYOUT_ID = R.layout.list_item
+        }
     }
     class TweetListAdapter(context: Context, tweets: List<TweetData>) : ArrayAdapter<TweetData>(context, 0, tweets) {
         private val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-            var view = convertView
-            var holder: ViewHolder
             val data = getItem(position) as TweetData
-
-            if (view == null) {
-                view = layoutInflater.inflate(R.layout.list_item, parent, false)
-                holder = ViewHolder(view)
-                view.tag = holder
-            } else {
-                holder = view.tag as ViewHolder
-            }
+            val view = LayoutInflater.from(context).inflate(ViewHolder.LAYOUT_ID,parent,false)
+            val holder = ViewHolder(view)
             holder.id.text = data.id
             holder.txt.text = data.tweet
             holder.img.setImageResource(data.img_id)
@@ -64,15 +60,8 @@ class MainActivity : AppCompatActivity() {
             holder.rt.setImageResource(data.rt)
             holder.share.setImageResource(data.share)
             holder.comment.setImageResource(data.comment)
-            if(view==null){
-                view = layoutInflater.inflate(R.layout.list_item, parent, false)
-                return view;
-            }else {
-                return view
-            }
+            return view
         }
-
-
     }
 
 
