@@ -26,7 +26,7 @@ import tutorial.fujikawa.fuller.tutorial.R.id.view
 //import tutorial.fujikawa.fuller.tutorial.R.id.list_item
 
 class MainActivity : AppCompatActivity() {
-    var key_ : Int = 1
+    private var key : Int = 1
     //ここでは、list_itemに格納するデータを持つdata classを作成する
     data class TweetData(val id:String, val tweet:String,val img_id:Int,
                          val tweet_img:Int=R.drawable.fuller,val rt:Int = R.drawable.rt,val fav :Int = R.drawable.fav,val share:Int=R.drawable.share,val comment:Int=R.drawable.coment)
@@ -78,8 +78,6 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = TweetListAdapter(this, tweets)
         view.adapter = adapter
-
-        //val key:String = "1"
         val database = FirebaseDatabase.getInstance()
         val ref = database.reference
 
@@ -87,7 +85,7 @@ class MainActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 //直近1ツイートだけ取得
                 var num = dataSnapshot.childrenCount
-                key_ = num.toInt()
+                key = num.toInt()
                 SetTweet(adapter,dataSnapshot)
             }
 
@@ -100,14 +98,14 @@ class MainActivity : AppCompatActivity() {
     //keyを増やす関数
     //なんとなく関数化した
     private fun count(){
-        this.key_+=1
+        this.key+=1
     }
     //ツイートをリストに入れる関数
     fun SetTweet(adapter:TweetListAdapter,dataSnapshot: DataSnapshot){
         val img = R.drawable.images
-        val idValue = dataSnapshot.child(key_.toString()).child("id").value
-        val tweetValue = dataSnapshot.child(key_.toString()).child("tweet").value
-        val tweetImg_ = dataSnapshot.child(key_.toString()).child("url").value
+        val idValue = dataSnapshot.child(key.toString()).child("id").value
+        val tweetValue = dataSnapshot.child(key.toString()).child("tweet").value
+        val tweetImg_ = dataSnapshot.child(key.toString()).child("url").value
         val textId : String = idValue.toString()
         val textTweet : String = tweetValue.toString()
         val dataImage = img
