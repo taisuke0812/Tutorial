@@ -20,10 +20,8 @@ import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.list_item.*
+import kotlinx.android.synthetic.main.list_item.view.*
 import org.w3c.dom.Text
-import tutorial.fujikawa.fuller.tutorial.R.id.view
-
-//import tutorial.fujikawa.fuller.tutorial.R.id.list_item
 
 class MainActivity : AppCompatActivity() {
     private var key : Int = 1
@@ -34,14 +32,14 @@ class MainActivity : AppCompatActivity() {
     //ここではlist_itemの要素を持つdata classを作成する
     //data class ViewHolder(var id: TextView,var tweet: TextView,var profile_img:ImageView)
     data class ViewHolder(var view : View){
-        val id = view.findViewById<TextView>(R.id.id_name)
-        val txt = view.findViewById<TextView>(R.id.tweet_data)
-        val img = view.findViewById<ImageView>(R.id.profile_img)
-        val tweet_img = view.findViewById<ImageView>(R.id.tweet_img)
-        val fav = view.findViewById<ImageView>(R.id.fav)
-        val rt =  view.findViewById<ImageView>(R.id.rt)
-        val share = view.findViewById<ImageView>(R.id.share)
-        val comment = view.findViewById<ImageView>(R.id.comment)
+        val id = view.id_name
+        val txt = view.tweet_data
+        val img = view.profile_img
+        val tweet_img = view.tweet_img
+        val fav = view.fav
+        val rt =  view.rt
+        val share = view.share
+        val comment = view.comment
         companion object {
             const val LAYOUT_ID = R.layout.list_item
         }

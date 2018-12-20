@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".detail">
         </activity>
+        <activity android:name=".akita">
+        </activity>
     </application>
 
 </manifest>
