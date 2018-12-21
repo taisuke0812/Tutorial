@@ -6,6 +6,7 @@ import android.media.Image
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     //ここではlist_itemの要素を持つdata classを作成する
     //data class ViewHolder(var id: TextView,var tweet: TextView,var profile_img:ImageView)
-    data class ViewHolder(var view : View){
+    data class ViewHolder(var view : View ) : RecyclerView.ViewHolder(view){
         val id = view.id_name
         val txt = view.tweet_data
         val img = view.profile_img
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             const val LAYOUT_ID = R.layout.list_item
         }
     }
-    class TweetListAdapter(context: Context, tweets: List<TweetData>) : ArrayAdapter<TweetData>(context, 0, tweets) {
+    open class TweetListAdapter(context: Context, tweets: List<TweetData>) : RecyclerView.Adapter<TweetData>(context, 0, tweets) {
         private val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             val data = getItem(position) as TweetData
